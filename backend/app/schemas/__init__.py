@@ -75,6 +75,16 @@ from app.schemas.dashboard import (
     NotificationResponse,
     RecentActivityItem,
 )
+from app.schemas.reports import (
+    AssetReportResponse,
+    AuditReportResponse,
+    BookingReportResponse,
+    DashboardSummaryResponse,
+    DepartmentReportResponse,
+    ExportRequest,
+    MaintenanceReportResponse,
+    ReportResponse,
+)
 
 __all__ = [
     # auth
@@ -110,4 +120,9 @@ __all__ = [
     "NotificationResponse", "NotificationListResponse",
     "ActivityLogResponse", "ActivityLogListResponse",
     "KPIResponse", "DashboardResponse", "RecentActivityItem",
+    # reports
+    "ReportResponse", "DashboardSummaryResponse",
+    "AssetReportResponse", "DepartmentReportResponse",
+    "MaintenanceReportResponse", "BookingReportResponse", "AuditReportResponse",
+    "ExportRequest",
 ]

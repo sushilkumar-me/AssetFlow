@@ -620,3 +620,91 @@ export interface DashboardData {
   recent_activity: RecentActivityItem[]
   unread_notifications: number
 }
+// ── Reports / Analytics ──────────────────────────────────────────────────────
+
+export interface DashboardSummary {
+  total_assets: number
+  total_departments: number
+  total_employees: number
+  open_audits: number
+  pending_maintenance: number
+  active_bookings: number
+}
+
+export interface AssetReport {
+  total_assets: number
+  status_breakdown: Record<string, number>
+  allocation_percentage: number
+  most_used_assets: Array<{ id: number; name: string; asset_tag: string; allocation_count: number }>
+  least_used_assets: Array<{ id: number; name: string; asset_tag: string; allocation_count: number }>
+  idle_assets: Array<{ id: number; name: string; asset_tag: string; status: string }>
+}
+
+export interface DepartmentAssetSummary {
+  department_id: number
+  department_name: string
+  allocated: number
+  available: number
+  under_maintenance: number
+  lost: number
+  total: number
+}
+
+export interface DepartmentReport {
+  departments: DepartmentAssetSummary[]
+  unassigned_assets: number
+}
+
+export interface MonthlyCount {
+  year: number
+  month: number
+  count: number
+}
+
+export interface MaintenanceReport {
+  monthly_requests: MonthlyCount[]
+  priority_distribution: Record<string, number>
+  status_distribution: Record<string, number>
+  most_repaired_assets: Array<{ id: number; name: string; asset_tag: string; repair_count: number }>
+  average_resolution_days: number
+  total_requests: number
+}
+
+export interface HourlyCount {
+  hour: number
+  count: number
+}
+
+export interface DailyCount {
+  date: string
+  count: number
+}
+
+export interface BookingReport {
+  most_booked_assets: Array<{ id: number; name: string; asset_tag: string; booking_count: number }>
+  status_distribution: Record<string, number>
+  hourly_distribution: HourlyCount[]
+  daily_usage: DailyCount[]
+  weekly_usage: Array<{ week: string; count: number }>
+  total_bookings: number
+}
+
+export interface AuditSummary {
+  id: number
+  name: string
+  status: string
+  total_verified: number
+  missing: number
+  damaged: number
+  discrepancy_percentage: number
+}
+
+export interface AuditReport {
+  open_audits: number
+  in_progress_audits: number
+  closed_audits: number
+  verified_assets: number
+  missing_assets: number
+  damaged_assets: number
+  recent_audits: AuditSummary[]
+}

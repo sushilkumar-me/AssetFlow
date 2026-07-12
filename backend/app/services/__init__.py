@@ -10,10 +10,12 @@ from app.services.booking_service import BookingService
 from app.services.maintenance_service import MaintenanceService
 from app.services.audit_service import AuditService
 from app.services.dashboard_service import NotificationService, ActivityLogService, DashboardService
+from app.services.report_service import ReportService
 
 __all__ = [
     "AuthService", "DepartmentService", "CategoryService",
     "EmployeeService", "AssetService", "AllocationService",
     "TransferService", "BookingService", "MaintenanceService", "AuditService",
     "NotificationService", "ActivityLogService", "DashboardService",
+    "ReportService",
 ]

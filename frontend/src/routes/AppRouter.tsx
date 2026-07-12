@@ -20,6 +20,7 @@ import {
   NotificationsPage,
   OrganizationPage,
   PlaceholderPage,
+  ReportsPage,
   SignupPage,
   TransfersPage,
 } from '@/pages'
@@ -73,6 +74,9 @@ export default function AppRouter() {
               {/* Audits */}
               <Route path="audits"     element={<AuditsPage />} />
               <Route path="audits/:id" element={<AuditDetailPage />} />
+
+              {/* Reports */}
+              <Route path="reports" element={<ReportsPage />} />
 
               {/* Notifications & Activity */}
               <Route path="notifications"  element={<NotificationsPage />} />
