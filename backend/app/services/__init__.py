@@ -4,5 +4,10 @@ from app.services.department_service import DepartmentService
 from app.services.category_service import CategoryService
 from app.services.employee_service import EmployeeService
 from app.services.asset_service import AssetService
+from app.services.allocation_service import AllocationService
+from app.services.transfer_service import TransferService
 
-__all__ = ["AuthService", "DepartmentService", "CategoryService", "EmployeeService", "AssetService"]
+__all__ = [
+    "AuthService", "DepartmentService", "CategoryService",
+    "EmployeeService", "AssetService", "AllocationService", "TransferService",
+]

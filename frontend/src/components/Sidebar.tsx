@@ -43,6 +43,11 @@ const NAV_ITEMS: RoleNavItem[] = [
     path: '/assets',
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
   },
+  {
+    label: 'Transfer Requests',
+    path: '/transfers',
+    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
+  },
 
   // ── Department Head ───────────────────────────────────────────────────────
   {
@@ -65,6 +70,16 @@ const NAV_ITEMS: RoleNavItem[] = [
   {
     label: 'Allocations',
     path: '/allocations',
+    roles: ['ASSET_MANAGER', 'ADMIN'],
+  },
+  {
+    label: 'Transfers',
+    path: '/transfers',
+    roles: ['ASSET_MANAGER', 'ADMIN'],
+  },
+  {
+    label: 'Alloc. History',
+    path: '/allocations/history',
     roles: ['ASSET_MANAGER', 'ADMIN'],
   },
   {

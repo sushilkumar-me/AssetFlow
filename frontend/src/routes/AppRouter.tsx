@@ -14,6 +14,8 @@ import { MainLayout, AuthLayout } from '@/layouts'
 import ProtectedRoute from './ProtectedRoute'
 
 import {
+  AllocationsPage,
+  AllocationHistoryPage,
   AssetDetailPage,
   AssetsPage,
   DashboardPage,
@@ -22,6 +24,7 @@ import {
   OrganizationPage,
   PlaceholderPage,
   SignupPage,
+  TransfersPage,
 } from '@/pages'
 
 function PageLoader() {
@@ -54,11 +57,15 @@ export default function AppRouter() {
               </Route>
 
               {/* ── Asset module ───────────────────────────────────── */}
-              <Route path="assets"       element={<AssetsPage />} />
-              <Route path="assets/:id"   element={<AssetDetailPage />} />
+              <Route path="assets"     element={<AssetsPage />} />
+              <Route path="assets/:id" element={<AssetDetailPage />} />
+
+              {/* ── Allocation & Transfer module ───────────────────── */}
+              <Route path="allocations"         element={<AllocationsPage />} />
+              <Route path="allocations/history" element={<AllocationHistoryPage />} />
+              <Route path="transfers"           element={<TransfersPage />} />
 
               {/* ── Module placeholders ────────────────────────────── */}
-              <Route path="allocations"   element={<PlaceholderPage module="allocations" />} />
               <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
               <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
               <Route path="audits"        element={<PlaceholderPage module="audits" />} />

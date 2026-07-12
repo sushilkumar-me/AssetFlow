@@ -30,6 +30,16 @@ from app.schemas.asset import (
     AssetStatusUpdate,
     AssetUpdateRequest,
 )
+from app.schemas.allocation import (
+    AllocateRequest,
+    AllocationListResponse,
+    AllocationResponse,
+    ReturnRequest,
+    TransferActionRequest,
+    TransferCreateRequest,
+    TransferListResponse,
+    TransferResponse,
+)
 
 __all__ = [
     # auth
@@ -46,4 +56,8 @@ __all__ = [
     # assets
     "AssetCreateRequest", "AssetUpdateRequest", "AssetStatusUpdate",
     "AssetResponse", "AssetListResponse",
+    # allocations
+    "AllocateRequest", "ReturnRequest", "AllocationResponse", "AllocationListResponse",
+    # transfers
+    "TransferCreateRequest", "TransferActionRequest", "TransferResponse", "TransferListResponse",
 ]

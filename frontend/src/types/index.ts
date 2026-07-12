@@ -250,3 +250,71 @@ export interface AssetUpdate {
   is_shared?: boolean
   photo_url?: string | null
 }
+
+// ── Allocation ────────────────────────────────────────────────────────────────
+
+export type AllocationStatus = 'ACTIVE' | 'RETURNED' | 'OVERDUE'
+
+export const ALLOCATION_STATUSES: AllocationStatus[] = ['ACTIVE', 'RETURNED', 'OVERDUE']
+
+export const ALLOCATION_STATUS_LABELS: Record<AllocationStatus, string> = {
+  ACTIVE:   'Active',
+  RETURNED: 'Returned',
+  OVERDUE:  'Overdue',
+}
+
+export interface AssetAllocation extends BaseEntity {
+  asset_id: number
+  employee_id: number
+  allocated_by: number
+  allocated_at: string
+  expected_return_date: string | null
+  returned_at: string | null
+  status: AllocationStatus
+  condition_notes: string | null
+}
+
+export interface AllocateRequest {
+  asset_id: number
+  employee_id: number
+  expected_return_date?: string | null
+  condition_notes?: string | null
+}
+
+export interface ReturnRequest {
+  condition_notes?: string | null
+}
+
+// ── Transfer ──────────────────────────────────────────────────────────────────
+
+export type TransferStatus = 'PENDING' | 'APPROVED' | 'REJECTED'
+
+export const TRANSFER_STATUSES: TransferStatus[] = ['PENDING', 'APPROVED', 'REJECTED']
+
+export const TRANSFER_STATUS_LABELS: Record<TransferStatus, string> = {
+  PENDING:  'Pending',
+  APPROVED: 'Approved',
+  REJECTED: 'Rejected',
+}
+
+export interface TransferRequest extends BaseEntity {
+  asset_id: number
+  from_employee_id: number
+  to_employee_id: number
+  requested_by: number
+  approved_by: number | null
+  status: TransferStatus
+  remarks: string | null
+  requested_at: string
+  approved_at: string | null
+}
+
+export interface TransferCreateRequest {
+  asset_id: number
+  to_employee_id: number
+  remarks?: string | null
+}
+
+export interface TransferActionRequest {
+  remarks?: string | null
+}

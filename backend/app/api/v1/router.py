@@ -19,6 +19,7 @@ from app.api.v1.endpoints import (
     maintenance,
     notifications,
     reports,
+    transfers,
 )
 
 api_v1_router = APIRouter()
@@ -37,6 +38,7 @@ api_v1_router.include_router(assets.router)
 
 # ── Operations ────────────────────────────────────────────────────────────────
 api_v1_router.include_router(allocations.router)
+api_v1_router.include_router(transfers.router)
 api_v1_router.include_router(bookings.router)
 api_v1_router.include_router(maintenance.router)
 
