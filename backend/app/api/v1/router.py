@@ -21,7 +21,6 @@ from app.api.v1.endpoints import (
     reports,
     transfers,
 )
-
 api_v1_router = APIRouter()
 
 # ── System ────────────────────────────────────────────────────────────────────
@@ -41,6 +40,7 @@ api_v1_router.include_router(allocations.router)
 api_v1_router.include_router(transfers.router)
 api_v1_router.include_router(bookings.router)
 api_v1_router.include_router(maintenance.router)
+api_v1_router.include_router(maintenance.asset_router)  # /assets/{id}/maintenance-history
 
 # ── Governance & reporting ────────────────────────────────────────────────────
 api_v1_router.include_router(audits.router)

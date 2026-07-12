@@ -48,6 +48,15 @@ from app.schemas.booking import (
     BookingResponse,
     CalendarResponse,
 )
+from app.schemas.maintenance import (
+    MaintenanceApproveRequest,
+    MaintenanceAssignRequest,
+    MaintenanceCreateRequest,
+    MaintenanceListResponse,
+    MaintenanceRejectRequest,
+    MaintenanceResolveRequest,
+    MaintenanceResponse,
+)
 
 __all__ = [
     # auth
@@ -71,4 +80,8 @@ __all__ = [
     # bookings
     "BookingCreateRequest", "BookingRescheduleRequest", "BookingCancelRequest",
     "BookingResponse", "BookingListResponse", "CalendarResponse",
+    # maintenance
+    "MaintenanceCreateRequest", "MaintenanceApproveRequest", "MaintenanceRejectRequest",
+    "MaintenanceAssignRequest", "MaintenanceResolveRequest",
+    "MaintenanceResponse", "MaintenanceListResponse",
 ]

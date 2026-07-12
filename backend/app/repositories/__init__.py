@@ -7,6 +7,7 @@ from app.repositories.asset_repository import AssetRepository
 from app.repositories.allocation_repository import AssetAllocationRepository
 from app.repositories.transfer_repository import TransferRepository
 from app.repositories.booking_repository import BookingRepository
+from app.repositories.maintenance_repository import MaintenanceRepository
 
 __all__ = [
     "UserRepository",
@@ -17,4 +18,5 @@ __all__ = [
     "AssetAllocationRepository",
     "TransferRepository",
     "BookingRepository",
+    "MaintenanceRepository",
 ]

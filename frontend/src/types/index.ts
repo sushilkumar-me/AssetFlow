@@ -378,3 +378,77 @@ export interface CalendarResponse {
   date_from: string
   date_to: string
 }
+
+// ── Maintenance ───────────────────────────────────────────────────────────────
+
+export type MaintenancePriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+
+export type MaintenanceStatus =
+  | 'PENDING'
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'TECHNICIAN_ASSIGNED'
+  | 'IN_PROGRESS'
+  | 'RESOLVED'
+
+export const MAINTENANCE_PRIORITIES: MaintenancePriority[] = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']
+
+export const MAINTENANCE_STATUSES: MaintenanceStatus[] = [
+  'PENDING', 'APPROVED', 'REJECTED', 'TECHNICIAN_ASSIGNED', 'IN_PROGRESS', 'RESOLVED',
+]
+
+export const MAINTENANCE_PRIORITY_LABELS: Record<MaintenancePriority, string> = {
+  LOW:      'Low',
+  MEDIUM:   'Medium',
+  HIGH:     'High',
+  CRITICAL: 'Critical',
+}
+
+export const MAINTENANCE_STATUS_LABELS: Record<MaintenanceStatus, string> = {
+  PENDING:             'Pending',
+  APPROVED:            'Approved',
+  REJECTED:            'Rejected',
+  TECHNICIAN_ASSIGNED: 'Technician Assigned',
+  IN_PROGRESS:         'In Progress',
+  RESOLVED:            'Resolved',
+}
+
+export interface MaintenanceRequest extends BaseEntity {
+  asset_id: number
+  raised_by: number
+  approved_by: number | null
+  issue_title: string
+  issue_description: string
+  priority: MaintenancePriority
+  attachment_url: string | null
+  status: MaintenanceStatus
+  technician_name: string | null
+  approval_remarks: string | null
+  resolution_notes: string | null
+  approved_at: string | null
+  resolved_at: string | null
+}
+
+export interface MaintenanceCreate {
+  asset_id: number
+  issue_title: string
+  issue_description: string
+  priority?: MaintenancePriority
+  attachment_url?: string | null
+}
+
+export interface MaintenanceApprove {
+  approval_remarks?: string | null
+}
+
+export interface MaintenanceReject {
+  approval_remarks: string
+}
+
+export interface MaintenanceAssign {
+  technician_name: string
+}
+
+export interface MaintenanceResolve {
+  resolution_notes: string
+}

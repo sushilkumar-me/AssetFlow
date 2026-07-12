@@ -42,8 +42,7 @@ const NAV_ITEMS: RoleNavItem[] = [
     label: 'Maintenance',
     path: '/maintenance',
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },
-  {
+  },  {
     label: 'Assets',
     path: '/assets',
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
@@ -107,7 +106,6 @@ const NAV_ITEMS: RoleNavItem[] = [
     path: '/maintenance',
     roles: ['ASSET_MANAGER', 'ADMIN'],
   },
-
   // ── Admin ────────────────────────────────────────────────────────────────
   {
     label: 'Organization Setup',

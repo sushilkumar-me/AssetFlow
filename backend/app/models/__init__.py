@@ -5,6 +5,7 @@ from app.models.category import AssetCategory
 from app.models.asset import Asset, AssetStatus, AssetCondition
 from app.models.allocation import AssetAllocation, TransferRequest, AllocationStatus, TransferStatus
 from app.models.booking import ResourceBooking, BookingStatus
+from app.models.maintenance import MaintenanceRequest, MaintenancePriority, MaintenanceStatus
 
 __all__ = [
     "User", "UserRole",
@@ -14,4 +15,5 @@ __all__ = [
     "AssetAllocation", "AllocationStatus",
     "TransferRequest", "TransferStatus",
     "ResourceBooking", "BookingStatus",
+    "MaintenanceRequest", "MaintenancePriority", "MaintenanceStatus",
 ]
