@@ -6,6 +6,7 @@ from app.repositories.employee_repository import EmployeeRepository
 from app.repositories.asset_repository import AssetRepository
 from app.repositories.allocation_repository import AssetAllocationRepository
 from app.repositories.transfer_repository import TransferRepository
+from app.repositories.booking_repository import BookingRepository
 
 __all__ = [
     "UserRepository",
@@ -15,4 +16,5 @@ __all__ = [
     "AssetRepository",
     "AssetAllocationRepository",
     "TransferRepository",
+    "BookingRepository",
 ]

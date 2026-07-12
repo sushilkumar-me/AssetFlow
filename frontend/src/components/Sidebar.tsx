@@ -34,6 +34,11 @@ const NAV_ITEMS: RoleNavItem[] = [
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
   },
   {
+    label: 'Booking Calendar',
+    path: '/bookings/calendar',
+    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
+  },
+  {
     label: 'Maintenance',
     path: '/maintenance',
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
@@ -80,6 +85,16 @@ const NAV_ITEMS: RoleNavItem[] = [
   {
     label: 'Alloc. History',
     path: '/allocations/history',
+    roles: ['ASSET_MANAGER', 'ADMIN'],
+  },
+  {
+    label: 'Bookings',
+    path: '/bookings',
+    roles: ['ASSET_MANAGER', 'ADMIN'],
+  },
+  {
+    label: 'Booking Calendar',
+    path: '/bookings/calendar',
     roles: ['ASSET_MANAGER', 'ADMIN'],
   },
   {

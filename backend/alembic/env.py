@@ -24,6 +24,7 @@ from app.models.department import Department        # noqa: F401
 from app.models.category import AssetCategory      # noqa: F401
 from app.models.asset import Asset, AssetStatus, AssetCondition  # noqa: F401
 from app.models.allocation import AssetAllocation, TransferRequest, AllocationStatus, TransferStatus  # noqa: F401
+from app.models.booking import ResourceBooking, BookingStatus  # noqa: F401
 
 # ── Alembic config object ─────────────────────────────────────────────────────
 config = context.config

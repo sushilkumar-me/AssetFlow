@@ -318,3 +318,63 @@ export interface TransferCreateRequest {
 export interface TransferActionRequest {
   remarks?: string | null
 }
+
+// ── Resource Booking ──────────────────────────────────────────────────────────
+
+export type BookingStatus = 'UPCOMING' | 'ONGOING' | 'COMPLETED' | 'CANCELLED'
+
+export const BOOKING_STATUSES: BookingStatus[] = [
+  'UPCOMING', 'ONGOING', 'COMPLETED', 'CANCELLED',
+]
+
+export const BOOKING_STATUS_LABELS: Record<BookingStatus, string> = {
+  UPCOMING:  'Upcoming',
+  ONGOING:   'Ongoing',
+  COMPLETED: 'Completed',
+  CANCELLED: 'Cancelled',
+}
+
+export interface ResourceBooking extends BaseEntity {
+  asset_id: number
+  employee_id: number
+  department_id: number | null
+  title: string
+  purpose: string | null
+  start_datetime: string
+  end_datetime: string
+  status: BookingStatus
+  remarks: string | null
+}
+
+export interface BookingCreate {
+  asset_id: number
+  title: string
+  purpose?: string | null
+  start_datetime: string
+  end_datetime: string
+  remarks?: string | null
+}
+
+export interface BookingReschedule {
+  start_datetime: string
+  end_datetime: string
+  remarks?: string | null
+}
+
+export interface BookingCancel {
+  remarks?: string | null
+}
+
+export interface CalendarEntry {
+  asset_id: number
+  asset_name: string
+  asset_tag: string
+  location: string | null
+  bookings: ResourceBooking[]
+}
+
+export interface CalendarResponse {
+  entries: CalendarEntry[]
+  date_from: string
+  date_to: string
+}

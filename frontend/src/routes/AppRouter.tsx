@@ -3,7 +3,7 @@
  *
  * Route groups:
  *   Public    — AuthLayout  (/login, /signup)
- *   Protected — MainLayout  wrapped by ProtectedRoute (all app pages)
+ *   Protected — MainLayout  wrapped by ProtectedRoute
  *   Admin     — sub-group requiring ADMIN role (/organization)
  */
 
@@ -18,6 +18,8 @@ import {
   AllocationHistoryPage,
   AssetDetailPage,
   AssetsPage,
+  BookingCalendarPage,
+  BookingsPage,
   DashboardPage,
   LoginPage,
   NotFoundPage,
@@ -65,8 +67,11 @@ export default function AppRouter() {
               <Route path="allocations/history" element={<AllocationHistoryPage />} />
               <Route path="transfers"           element={<TransfersPage />} />
 
+              {/* ── Booking module ─────────────────────────────────── */}
+              <Route path="bookings"          element={<BookingsPage />} />
+              <Route path="bookings/calendar" element={<BookingCalendarPage />} />
+
               {/* ── Module placeholders ────────────────────────────── */}
-              <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
               <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
               <Route path="audits"        element={<PlaceholderPage module="audits" />} />
               <Route path="reports"       element={<PlaceholderPage module="reports" />} />

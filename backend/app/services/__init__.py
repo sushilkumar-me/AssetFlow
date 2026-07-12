@@ -6,8 +6,10 @@ from app.services.employee_service import EmployeeService
 from app.services.asset_service import AssetService
 from app.services.allocation_service import AllocationService
 from app.services.transfer_service import TransferService
+from app.services.booking_service import BookingService
 
 __all__ = [
     "AuthService", "DepartmentService", "CategoryService",
-    "EmployeeService", "AssetService", "AllocationService", "TransferService",
+    "EmployeeService", "AssetService", "AllocationService",
+    "TransferService", "BookingService",
 ]

@@ -40,6 +40,14 @@ from app.schemas.allocation import (
     TransferListResponse,
     TransferResponse,
 )
+from app.schemas.booking import (
+    BookingCancelRequest,
+    BookingCreateRequest,
+    BookingListResponse,
+    BookingRescheduleRequest,
+    BookingResponse,
+    CalendarResponse,
+)
 
 __all__ = [
     # auth
@@ -60,4 +68,7 @@ __all__ = [
     "AllocateRequest", "ReturnRequest", "AllocationResponse", "AllocationListResponse",
     # transfers
     "TransferCreateRequest", "TransferActionRequest", "TransferResponse", "TransferListResponse",
+    # bookings
+    "BookingCreateRequest", "BookingRescheduleRequest", "BookingCancelRequest",
+    "BookingResponse", "BookingListResponse", "CalendarResponse",
 ]
