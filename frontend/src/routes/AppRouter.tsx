@@ -2,8 +2,9 @@
  * Application router.
  *
  * Route groups:
- *   Public  — AuthLayout  (/login, /signup)
- *   Private — MainLayout  wrapped by ProtectedRoute (all app pages)
+ *   Public    — AuthLayout  (/login, /signup)
+ *   Protected — MainLayout  wrapped by ProtectedRoute
+ *   Admin     — sub-group requiring ADMIN role
  */
 
 import { Suspense } from 'react'
@@ -16,6 +17,7 @@ import {
   DashboardPage,
   LoginPage,
   NotFoundPage,
+  OrganizationPage,
   PlaceholderPage,
   SignupPage,
 } from '@/pages'
@@ -33,22 +35,24 @@ export default function AppRouter() {
     <BrowserRouter>
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          {/* ── Public — unauthenticated only ───────────────────────── */}
+          {/* ── Public ──────────────────────────────────────────────── */}
           <Route element={<AuthLayout />}>
             <Route path="/login"  element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Route>
 
-          {/* ── Protected — requires valid JWT ──────────────────────── */}
+          {/* ── Protected (any authenticated user) ──────────────────── */}
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route index element={<DashboardPage />} />
 
-              {/* Module placeholders — swap for real pages as built */}
+              {/* ── Admin-only ─────────────────────────────────────── */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
+                <Route path="organization" element={<OrganizationPage />} />
+              </Route>
+
+              {/* ── Shared module placeholders ─────────────────────── */}
               <Route path="assets"        element={<PlaceholderPage module="assets" />} />
-              <Route path="employees"     element={<PlaceholderPage module="employees" />} />
-              <Route path="departments"   element={<PlaceholderPage module="departments" />} />
-              <Route path="categories"    element={<PlaceholderPage module="categories" />} />
               <Route path="allocations"   element={<PlaceholderPage module="allocations" />} />
               <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
               <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
@@ -56,6 +60,11 @@ export default function AppRouter() {
               <Route path="reports"       element={<PlaceholderPage module="reports" />} />
               <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
               <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
+
+              {/* ── Legacy placeholder routes (non-admin access) ───── */}
+              <Route path="departments" element={<PlaceholderPage module="departments" />} />
+              <Route path="categories"  element={<PlaceholderPage module="categories" />} />
+              <Route path="employees"   element={<PlaceholderPage module="employees" />} />
             </Route>
           </Route>
 

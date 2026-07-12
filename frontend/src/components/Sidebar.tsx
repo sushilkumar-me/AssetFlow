@@ -75,6 +75,11 @@ const NAV_ITEMS: RoleNavItem[] = [
 
   // ── Admin ────────────────────────────────────────────────────────────────
   {
+    label: 'Organization Setup',
+    path: '/organization',
+    roles: ['ADMIN'],
+  },
+  {
     label: 'Employee Directory',
     path: '/employees',
     roles: ['ADMIN'],

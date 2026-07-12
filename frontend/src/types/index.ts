@@ -15,16 +15,16 @@ export interface PaginatedResponse<T = unknown> {
   items: T[]
   total: number
   page: number
-  pageSize: number
-  totalPages: number
+  page_size: number
+  total_pages: number
 }
 
 // ── Common entity shape ───────────────────────────────────────────────────────
 
 export interface BaseEntity {
   id: number
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────────
@@ -44,17 +44,28 @@ export type UserRole =
   | 'DEPARTMENT_HEAD'
   | 'EMPLOYEE'
 
+export const USER_ROLES: UserRole[] = [
+  'ADMIN',
+  'ASSET_MANAGER',
+  'DEPARTMENT_HEAD',
+  'EMPLOYEE',
+]
+
+export const ROLE_LABELS: Record<UserRole, string> = {
+  ADMIN:           'Administrator',
+  ASSET_MANAGER:   'Asset Manager',
+  DEPARTMENT_HEAD: 'Department Head',
+  EMPLOYEE:        'Employee',
+}
+
 // ── User ──────────────────────────────────────────────────────────────────────
 
-export interface User {
-  id: number
+export interface User extends BaseEntity {
   full_name: string
   email: string
   role: UserRole
   department_id: number | null
   is_active: boolean
-  created_at: string
-  updated_at: string
 }
 
 // ── Auth request / response shapes ───────────────────────────────────────────
@@ -87,4 +98,64 @@ export interface AuthState {
   token: string | null
   isAuthenticated: boolean
   isLoading: boolean
+}
+
+// ── Department ────────────────────────────────────────────────────────────────
+
+export interface Department extends BaseEntity {
+  name: string
+  description: string | null
+  parent_department_id: number | null
+  department_head_id: number | null
+  is_active: boolean
+}
+
+export interface DepartmentCreate {
+  name: string
+  description?: string | null
+  parent_department_id?: number | null
+  department_head_id?: number | null
+}
+
+export interface DepartmentUpdate {
+  name?: string
+  description?: string | null
+  parent_department_id?: number | null
+  department_head_id?: number | null
+}
+
+// ── Asset Category ────────────────────────────────────────────────────────────
+
+export interface AssetCategory extends BaseEntity {
+  name: string
+  description: string | null
+  custom_fields: Record<string, unknown> | null
+  is_active: boolean
+}
+
+export interface CategoryCreate {
+  name: string
+  description?: string | null
+  custom_fields?: Record<string, unknown> | null
+}
+
+export interface CategoryUpdate {
+  name?: string
+  description?: string | null
+  custom_fields?: Record<string, unknown> | null
+}
+
+// ── Employee (admin view) ─────────────────────────────────────────────────────
+
+export interface Employee extends BaseEntity {
+  full_name: string
+  email: string
+  role: UserRole
+  department_id: number | null
+  is_active: boolean
+}
+
+export interface EmployeeUpdate {
+  full_name?: string
+  department_id?: number | null
 }

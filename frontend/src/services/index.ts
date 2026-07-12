@@ -1,3 +1,6 @@
 export { default as api } from './api'
 export * from './health.service'
 export { authService } from './auth.service'
+export { departmentService } from './department.service'
+export { categoryService } from './category.service'
+export { employeeService } from './employee.service'

@@ -5,8 +5,8 @@ Represents an authenticated system user with a role-based access level.
 
 import enum
 
-from sqlalchemy import Boolean, Enum, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Boolean, Enum, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base, PrimaryKeyMixin, TimestampMixin
 
@@ -46,10 +46,10 @@ class User(PrimaryKeyMixin, TimestampMixin, Base):
         default=UserRole.EMPLOYEE,
         server_default=UserRole.EMPLOYEE.value,
     )
-    # Optional FK — populated once the Department model is created.
-    # No FK constraint enforced yet; will be added in a later migration.
+    # FK to departments — set null when department is deleted
     department_id: Mapped[int | None] = mapped_column(
         Integer,
+        ForeignKey("departments.id", ondelete="SET NULL"),
         nullable=True,
         default=None,
     )

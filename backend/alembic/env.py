@@ -19,7 +19,9 @@ from app.database.base import Base
 
 # NOTE: Import all models here so their tables are registered in Base.metadata.
 # Add new model imports below as modules are built.
-from app.models.user import User, UserRole  # noqa: F401
+from app.models.user import User, UserRole          # noqa: F401
+from app.models.department import Department        # noqa: F401
+from app.models.category import AssetCategory      # noqa: F401
 
 # ── Alembic config object ─────────────────────────────────────────────────────
 config = context.config
