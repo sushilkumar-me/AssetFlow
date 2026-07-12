@@ -1,9 +1,9 @@
 /**
  * Centralised Axios instance.
  *
- * - Base URL is driven by VITE_API_BASE_URL environment variable.
- * - Request interceptor attaches the JWT Bearer token when present.
- * - Response interceptor normalises errors for consistent handling.
+ * - Base URL driven by VITE_API_BASE_URL.
+ * - Request interceptor attaches the JWT Bearer token.
+ * - Response interceptor: on 401 clears the stored token and redirects to /login.
  */
 
 import axios, {
@@ -23,7 +23,7 @@ const api: AxiosInstance = axios.create({
   },
 })
 
-// ── Request interceptor — attach auth token ───────────────────────────────────
+// ── Request — attach token ────────────────────────────────────────────────────
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const token = localStorage.getItem('access_token')
@@ -35,7 +35,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 )
 
-// ── Response interceptor — normalise errors ───────────────────────────────────
+// ── Response — normalise errors + redirect on 401 ────────────────────────────
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
@@ -43,15 +43,19 @@ api.interceptors.response.use(
       const { status } = error.response
 
       if (status === 401) {
-        // Token expired or invalid — clear local storage
-        // Auth redirect will be handled once the auth module is implemented
         localStorage.removeItem('access_token')
+        // Only redirect if we're not already on an auth page to prevent loops
+        const currentPath = window.location.pathname
+        if (currentPath !== '/login' && currentPath !== '/signup') {
+          window.location.href = '/login'
+        }
       }
 
-      return Promise.reject(error.response.data ?? error)
+      // Surface the backend detail message when available
+      const detail = error.response.data?.detail ?? error.response.data?.message
+      return Promise.reject(new Error(detail ?? 'An unexpected error occurred.'))
     }
 
-    // Network error or timeout
     return Promise.reject(new Error('Network error — please check your connection.'))
   },
 )

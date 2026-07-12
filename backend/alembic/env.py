@@ -18,10 +18,8 @@ from app.core.config import settings
 from app.database.base import Base
 
 # NOTE: Import all models here so their tables are registered in Base.metadata.
-# When new models are created, add their imports below this comment.
-# Example:
-#   from app.models.asset import Asset
-#   from app.models.employee import Employee
+# Add new model imports below as modules are built.
+from app.models.user import User, UserRole  # noqa: F401
 
 # ── Alembic config object ─────────────────────────────────────────────────────
 config = context.config

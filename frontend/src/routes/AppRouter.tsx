@@ -1,17 +1,25 @@
 /**
  * Application router.
- * All routes are defined here in a single place for easy navigation management.
+ *
+ * Route groups:
+ *   Public  — AuthLayout  (/login, /signup)
+ *   Private — MainLayout  wrapped by ProtectedRoute (all app pages)
  */
 
 import { Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import { MainLayout, AuthLayout } from '@/layouts'
+import ProtectedRoute from './ProtectedRoute'
 
-// Eagerly loaded pages
-import { DashboardPage, LoginPage, NotFoundPage, PlaceholderPage } from '@/pages'
+import {
+  DashboardPage,
+  LoginPage,
+  NotFoundPage,
+  PlaceholderPage,
+  SignupPage,
+} from '@/pages'
 
-// Fallback while lazy chunks load
 function PageLoader() {
   return (
     <div className="flex h-40 items-center justify-center" role="status" aria-label="Loading page">
@@ -25,30 +33,34 @@ export default function AppRouter() {
     <BrowserRouter>
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          {/* ── Auth routes ────────────────────────────────────────────── */}
+          {/* ── Public — unauthenticated only ───────────────────────── */}
           <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login"  element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
           </Route>
 
-          {/* ── Main app routes ────────────────────────────────────────── */}
-          <Route element={<MainLayout />}>
-            <Route index element={<DashboardPage />} />
+          {/* ── Protected — requires valid JWT ──────────────────────── */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<MainLayout />}>
+              <Route index element={<DashboardPage />} />
 
-            {/* Module placeholders — replace with real pages as built */}
-            <Route path="assets"        element={<PlaceholderPage module="assets" />} />
-            <Route path="employees"     element={<PlaceholderPage module="employees" />} />
-            <Route path="departments"   element={<PlaceholderPage module="departments" />} />
-            <Route path="categories"    element={<PlaceholderPage module="categories" />} />
-            <Route path="allocations"   element={<PlaceholderPage module="allocations" />} />
-            <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
-            <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
-            <Route path="audits"        element={<PlaceholderPage module="audits" />} />
-            <Route path="reports"       element={<PlaceholderPage module="reports" />} />
-            <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
-            <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
+              {/* Module placeholders — swap for real pages as built */}
+              <Route path="assets"        element={<PlaceholderPage module="assets" />} />
+              <Route path="employees"     element={<PlaceholderPage module="employees" />} />
+              <Route path="departments"   element={<PlaceholderPage module="departments" />} />
+              <Route path="categories"    element={<PlaceholderPage module="categories" />} />
+              <Route path="allocations"   element={<PlaceholderPage module="allocations" />} />
+              <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
+              <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
+              <Route path="audits"        element={<PlaceholderPage module="audits" />} />
+              <Route path="reports"       element={<PlaceholderPage module="reports" />} />
+              <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
+              <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
+            </Route>
           </Route>
 
-          {/* ── Fallbacks ──────────────────────────────────────────────── */}
+          {/* ── Error pages ─────────────────────────────────────────── */}
+          <Route path="/403" element={<NotFoundPage />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*"    element={<Navigate to="/404" replace />} />
         </Routes>
