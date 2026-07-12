@@ -26,6 +26,7 @@ from app.models.asset import Asset, AssetStatus, AssetCondition  # noqa: F401
 from app.models.allocation import AssetAllocation, TransferRequest, AllocationStatus, TransferStatus  # noqa: F401
 from app.models.booking import ResourceBooking, BookingStatus  # noqa: F401
 from app.models.maintenance import MaintenanceRequest, MaintenancePriority, MaintenanceStatus  # noqa: F401
+from app.models.audit import AuditCycle, AuditAuditor, AuditRecord, AuditCycleStatus, AuditScopeType, VerificationStatus  # noqa: F401
 
 # ── Alembic config object ─────────────────────────────────────────────────────
 config = context.config

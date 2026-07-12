@@ -8,15 +8,11 @@ from app.repositories.allocation_repository import AssetAllocationRepository
 from app.repositories.transfer_repository import TransferRepository
 from app.repositories.booking_repository import BookingRepository
 from app.repositories.maintenance_repository import MaintenanceRepository
+from app.repositories.audit_repository import AuditCycleRepository, AuditRecordRepository
 
 __all__ = [
-    "UserRepository",
-    "DepartmentRepository",
-    "CategoryRepository",
-    "EmployeeRepository",
-    "AssetRepository",
-    "AssetAllocationRepository",
-    "TransferRepository",
-    "BookingRepository",
-    "MaintenanceRepository",
+    "UserRepository", "DepartmentRepository", "CategoryRepository",
+    "EmployeeRepository", "AssetRepository", "AssetAllocationRepository",
+    "TransferRepository", "BookingRepository", "MaintenanceRepository",
+    "AuditCycleRepository", "AuditRecordRepository",
 ]

@@ -57,6 +57,15 @@ from app.schemas.maintenance import (
     MaintenanceResolveRequest,
     MaintenanceResponse,
 )
+from app.schemas.audit import (
+    AssignAuditorsRequest,
+    AuditCycleCreateRequest,
+    AuditCycleListResponse,
+    AuditCycleResponse,
+    AuditRecordResponse,
+    DiscrepancyReport,
+    VerifyAssetRequest,
+)
 
 __all__ = [
     # auth
@@ -84,4 +93,8 @@ __all__ = [
     "MaintenanceCreateRequest", "MaintenanceApproveRequest", "MaintenanceRejectRequest",
     "MaintenanceAssignRequest", "MaintenanceResolveRequest",
     "MaintenanceResponse", "MaintenanceListResponse",
+    # audits
+    "AuditCycleCreateRequest", "AssignAuditorsRequest", "VerifyAssetRequest",
+    "AuditCycleResponse", "AuditCycleListResponse",
+    "AuditRecordResponse", "DiscrepancyReport",
 ]

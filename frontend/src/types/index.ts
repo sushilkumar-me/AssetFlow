@@ -452,3 +452,91 @@ export interface MaintenanceAssign {
 export interface MaintenanceResolve {
   resolution_notes: string
 }
+
+// ── Audit ─────────────────────────────────────────────────────────────────────
+
+export type AuditCycleStatus = 'OPEN' | 'IN_PROGRESS' | 'CLOSED'
+export type AuditScopeType   = 'ALL' | 'DEPARTMENT' | 'LOCATION'
+export type VerificationStatus = 'VERIFIED' | 'MISSING' | 'DAMAGED'
+
+export const AUDIT_CYCLE_STATUSES: AuditCycleStatus[] = ['OPEN', 'IN_PROGRESS', 'CLOSED']
+export const AUDIT_SCOPE_TYPES: AuditScopeType[] = ['ALL', 'DEPARTMENT', 'LOCATION']
+export const VERIFICATION_STATUSES: VerificationStatus[] = ['VERIFIED', 'MISSING', 'DAMAGED']
+
+export const AUDIT_CYCLE_STATUS_LABELS: Record<AuditCycleStatus, string> = {
+  OPEN:        'Open',
+  IN_PROGRESS: 'In Progress',
+  CLOSED:      'Closed',
+}
+
+export const AUDIT_SCOPE_LABELS: Record<AuditScopeType, string> = {
+  ALL:        'All Assets',
+  DEPARTMENT: 'By Department',
+  LOCATION:   'By Location',
+}
+
+export const VERIFICATION_STATUS_LABELS: Record<VerificationStatus, string> = {
+  VERIFIED: 'Verified',
+  MISSING:  'Missing',
+  DAMAGED:  'Damaged',
+}
+
+export interface AuditCycle extends BaseEntity {
+  name: string
+  scope_type: AuditScopeType
+  department_id: number | null
+  location: string | null
+  start_date: string
+  end_date: string
+  status: AuditCycleStatus
+  created_by: number
+  closed_by: number | null
+  closed_at: string | null
+  auditor_ids: number[]
+}
+
+export interface AuditCycleCreate {
+  name: string
+  scope_type?: AuditScopeType
+  department_id?: number | null
+  location?: string | null
+  start_date: string
+  end_date: string
+}
+
+export interface AuditRecord {
+  id: number
+  audit_cycle_id: number
+  asset_id: number
+  auditor_id: number
+  verification_status: VerificationStatus
+  remarks: string | null
+  verified_at: string
+  created_at: string
+}
+
+export interface DiscrepancyItem {
+  asset_id: number
+  asset_tag: string
+  asset_name: string
+  verification_status: VerificationStatus
+  remarks: string | null
+  auditor_id: number
+  verified_at: string
+}
+
+export interface DiscrepancyReport {
+  audit_cycle_id: number
+  audit_name: string
+  total_assets: number
+  verified_count: number
+  missing_count: number
+  damaged_count: number
+  discrepancies: DiscrepancyItem[]
+}
+
+export interface VerifyAssetPayload {
+  asset_id: number
+  verification_status: VerificationStatus
+  remarks?: string | null
+}

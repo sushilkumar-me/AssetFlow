@@ -1,24 +1,20 @@
 /**
- * Application router.
+ * Application router — all modules wired.
  */
 
 import { Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-
 import { MainLayout, AuthLayout } from '@/layouts'
 import ProtectedRoute from './ProtectedRoute'
 
 import {
-  AllocationsPage,
-  AllocationHistoryPage,
-  AssetDetailPage,
-  AssetsPage,
-  BookingCalendarPage,
-  BookingsPage,
+  AllocationsPage, AllocationHistoryPage,
+  AssetDetailPage, AssetsPage,
+  AuditDetailPage, AuditsPage,
+  BookingCalendarPage, BookingsPage,
   DashboardPage,
   LoginPage,
-  MaintenanceDetailPage,
-  MaintenancePage,
+  MaintenanceDetailPage, MaintenancePage,
   NotFoundPage,
   OrganizationPage,
   PlaceholderPage,
@@ -72,8 +68,11 @@ export default function AppRouter() {
               <Route path="maintenance"     element={<MaintenancePage />} />
               <Route path="maintenance/:id" element={<MaintenanceDetailPage />} />
 
+              {/* Audits */}
+              <Route path="audits"     element={<AuditsPage />} />
+              <Route path="audits/:id" element={<AuditDetailPage />} />
+
               {/* Placeholders */}
-              <Route path="audits"        element={<PlaceholderPage module="audits" />} />
               <Route path="reports"       element={<PlaceholderPage module="reports" />} />
               <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
               <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
