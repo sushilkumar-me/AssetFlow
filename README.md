@@ -5,6 +5,8 @@
 ---
 
 ## Overview
+# Database Schema:
+<img width="1094" height="839" alt="Screenshot 2026-07-12 164828" src="https://github.com/user-attachments/assets/0c99b846-ca8f-45f5-9409-f9da22844a8c" />
 
 AssetFlow gives organizations full visibility and control over every asset they own. From laptops and vehicles to shared conference rooms, AssetFlow tracks the entire asset lifecycle: registration → allocation → maintenance → audit → reporting.
 
