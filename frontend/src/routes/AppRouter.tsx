@@ -3,8 +3,8 @@
  *
  * Route groups:
  *   Public    — AuthLayout  (/login, /signup)
- *   Protected — MainLayout  wrapped by ProtectedRoute
- *   Admin     — sub-group requiring ADMIN role
+ *   Protected — MainLayout  wrapped by ProtectedRoute (all app pages)
+ *   Admin     — sub-group requiring ADMIN role (/organization)
  */
 
 import { Suspense } from 'react'
@@ -14,6 +14,8 @@ import { MainLayout, AuthLayout } from '@/layouts'
 import ProtectedRoute from './ProtectedRoute'
 
 import {
+  AssetDetailPage,
+  AssetsPage,
   DashboardPage,
   LoginPage,
   NotFoundPage,
@@ -51,8 +53,11 @@ export default function AppRouter() {
                 <Route path="organization" element={<OrganizationPage />} />
               </Route>
 
-              {/* ── Shared module placeholders ─────────────────────── */}
-              <Route path="assets"        element={<PlaceholderPage module="assets" />} />
+              {/* ── Asset module ───────────────────────────────────── */}
+              <Route path="assets"       element={<AssetsPage />} />
+              <Route path="assets/:id"   element={<AssetDetailPage />} />
+
+              {/* ── Module placeholders ────────────────────────────── */}
               <Route path="allocations"   element={<PlaceholderPage module="allocations" />} />
               <Route path="bookings"      element={<PlaceholderPage module="bookings" />} />
               <Route path="maintenance"   element={<PlaceholderPage module="maintenance" />} />
@@ -60,11 +65,9 @@ export default function AppRouter() {
               <Route path="reports"       element={<PlaceholderPage module="reports" />} />
               <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
               <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
-
-              {/* ── Legacy placeholder routes (non-admin access) ───── */}
-              <Route path="departments" element={<PlaceholderPage module="departments" />} />
-              <Route path="categories"  element={<PlaceholderPage module="categories" />} />
-              <Route path="employees"   element={<PlaceholderPage module="employees" />} />
+              <Route path="departments"   element={<PlaceholderPage module="departments" />} />
+              <Route path="categories"    element={<PlaceholderPage module="categories" />} />
+              <Route path="employees"     element={<PlaceholderPage module="employees" />} />
             </Route>
           </Route>
 

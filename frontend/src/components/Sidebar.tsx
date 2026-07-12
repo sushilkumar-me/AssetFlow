@@ -38,6 +38,11 @@ const NAV_ITEMS: RoleNavItem[] = [
     path: '/maintenance',
     roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
   },
+  {
+    label: 'Assets',
+    path: '/assets',
+    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
+  },
 
   // ── Department Head ───────────────────────────────────────────────────────
   {

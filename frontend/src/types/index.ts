@@ -159,3 +159,94 @@ export interface EmployeeUpdate {
   full_name?: string
   department_id?: number | null
 }
+
+// ── Asset ─────────────────────────────────────────────────────────────────────
+
+export type AssetStatus =
+  | 'AVAILABLE'
+  | 'ALLOCATED'
+  | 'RESERVED'
+  | 'UNDER_MAINTENANCE'
+  | 'LOST'
+  | 'RETIRED'
+  | 'DISPOSED'
+
+export type AssetCondition =
+  | 'NEW'
+  | 'GOOD'
+  | 'FAIR'
+  | 'POOR'
+  | 'NEEDS_REPAIR'
+
+export const ASSET_STATUSES: AssetStatus[] = [
+  'AVAILABLE', 'ALLOCATED', 'RESERVED', 'UNDER_MAINTENANCE',
+  'LOST', 'RETIRED', 'DISPOSED',
+]
+
+export const ASSET_CONDITIONS: AssetCondition[] = [
+  'NEW', 'GOOD', 'FAIR', 'POOR', 'NEEDS_REPAIR',
+]
+
+export const ASSET_STATUS_LABELS: Record<AssetStatus, string> = {
+  AVAILABLE:         'Available',
+  ALLOCATED:         'Allocated',
+  RESERVED:          'Reserved',
+  UNDER_MAINTENANCE: 'Under Maintenance',
+  LOST:              'Lost',
+  RETIRED:           'Retired',
+  DISPOSED:          'Disposed',
+}
+
+export const ASSET_CONDITION_LABELS: Record<AssetCondition, string> = {
+  NEW:         'New',
+  GOOD:        'Good',
+  FAIR:        'Fair',
+  POOR:        'Poor',
+  NEEDS_REPAIR:'Needs Repair',
+}
+
+export interface Asset extends BaseEntity {
+  asset_tag: string
+  name: string
+  serial_number: string | null
+  category_id: number
+  department_id: number | null
+  status: AssetStatus
+  condition: AssetCondition
+  is_active: boolean
+  is_shared: boolean
+  location: string | null
+  acquisition_date: string | null
+  acquisition_cost: string | null
+  description: string | null
+  photo_url: string | null
+  created_by: number | null
+}
+
+export interface AssetCreate {
+  name: string
+  category_id: number
+  serial_number?: string | null
+  department_id?: number | null
+  condition?: AssetCondition
+  location?: string | null
+  acquisition_date?: string | null
+  acquisition_cost?: string | null
+  description?: string | null
+  is_shared?: boolean
+  photo_url?: string | null
+}
+
+export interface AssetUpdate {
+  name?: string
+  category_id?: number
+  serial_number?: string | null
+  department_id?: number | null
+  condition?: AssetCondition
+  location?: string | null
+  acquisition_date?: string | null
+  acquisition_cost?: string | null
+  description?: string | null
+  is_shared?: boolean
+  photo_url?: string | null
+}

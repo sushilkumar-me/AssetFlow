@@ -23,6 +23,13 @@ from app.schemas.organization import (
     EmployeeStatusUpdate,
     EmployeeUpdate,
 )
+from app.schemas.asset import (
+    AssetCreateRequest,
+    AssetListResponse,
+    AssetResponse,
+    AssetStatusUpdate,
+    AssetUpdateRequest,
+)
 
 __all__ = [
     # auth
@@ -36,4 +43,7 @@ __all__ = [
     # employees
     "EmployeeUpdate", "EmployeeRoleUpdate", "EmployeeStatusUpdate",
     "EmployeeResponse", "EmployeeListResponse",
+    # assets
+    "AssetCreateRequest", "AssetUpdateRequest", "AssetStatusUpdate",
+    "AssetResponse", "AssetListResponse",
 ]
