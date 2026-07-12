@@ -9,10 +9,12 @@ from app.repositories.transfer_repository import TransferRepository
 from app.repositories.booking_repository import BookingRepository
 from app.repositories.maintenance_repository import MaintenanceRepository
 from app.repositories.audit_repository import AuditCycleRepository, AuditRecordRepository
+from app.repositories.notification_repository import NotificationRepository, ActivityLogRepository
 
 __all__ = [
     "UserRepository", "DepartmentRepository", "CategoryRepository",
     "EmployeeRepository", "AssetRepository", "AssetAllocationRepository",
     "TransferRepository", "BookingRepository", "MaintenanceRepository",
     "AuditCycleRepository", "AuditRecordRepository",
+    "NotificationRepository", "ActivityLogRepository",
 ]

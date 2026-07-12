@@ -9,9 +9,11 @@ from app.services.transfer_service import TransferService
 from app.services.booking_service import BookingService
 from app.services.maintenance_service import MaintenanceService
 from app.services.audit_service import AuditService
+from app.services.dashboard_service import NotificationService, ActivityLogService, DashboardService
 
 __all__ = [
     "AuthService", "DepartmentService", "CategoryService",
     "EmployeeService", "AssetService", "AllocationService",
     "TransferService", "BookingService", "MaintenanceService", "AuditService",
+    "NotificationService", "ActivityLogService", "DashboardService",
 ]

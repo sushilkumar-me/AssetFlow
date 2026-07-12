@@ -139,7 +139,7 @@ const NAV_ITEMS: RoleNavItem[] = [
   {
     label: 'Notifications',
     path: '/notifications',
-    roles: ['ADMIN', 'ASSET_MANAGER'],
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
   {
     label: 'Activity Logs',

@@ -66,6 +66,15 @@ from app.schemas.audit import (
     DiscrepancyReport,
     VerifyAssetRequest,
 )
+from app.schemas.dashboard import (
+    ActivityLogListResponse,
+    ActivityLogResponse,
+    DashboardResponse,
+    KPIResponse,
+    NotificationListResponse,
+    NotificationResponse,
+    RecentActivityItem,
+)
 
 __all__ = [
     # auth
@@ -97,4 +106,8 @@ __all__ = [
     "AuditCycleCreateRequest", "AssignAuditorsRequest", "VerifyAssetRequest",
     "AuditCycleResponse", "AuditCycleListResponse",
     "AuditRecordResponse", "DiscrepancyReport",
+    # dashboard / notifications / activity
+    "NotificationResponse", "NotificationListResponse",
+    "ActivityLogResponse", "ActivityLogListResponse",
+    "KPIResponse", "DashboardResponse", "RecentActivityItem",
 ]

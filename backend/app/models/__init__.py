@@ -7,6 +7,7 @@ from app.models.allocation import AssetAllocation, TransferRequest, AllocationSt
 from app.models.booking import ResourceBooking, BookingStatus
 from app.models.maintenance import MaintenanceRequest, MaintenancePriority, MaintenanceStatus
 from app.models.audit import AuditCycle, AuditAuditor, AuditRecord, AuditCycleStatus, AuditScopeType, VerificationStatus
+from app.models.notification import Notification, ActivityLog, NotificationType
 
 __all__ = [
     "User", "UserRole",
@@ -19,4 +20,5 @@ __all__ = [
     "MaintenanceRequest", "MaintenancePriority", "MaintenanceStatus",
     "AuditCycle", "AuditAuditor", "AuditRecord",
     "AuditCycleStatus", "AuditScopeType", "VerificationStatus",
+    "Notification", "ActivityLog", "NotificationType",
 ]

@@ -540,3 +540,83 @@ export interface VerifyAssetPayload {
   verification_status: VerificationStatus
   remarks?: string | null
 }
+
+// ── Notification ──────────────────────────────────────────────────────────────
+
+export type NotificationType =
+  | 'ASSET_ASSIGNED'
+  | 'BOOKING_CONFIRMED'
+  | 'BOOKING_REMINDER'
+  | 'TRANSFER_APPROVED'
+  | 'TRANSFER_REJECTED'
+  | 'MAINTENANCE_APPROVED'
+  | 'MAINTENANCE_REJECTED'
+  | 'MAINTENANCE_RESOLVED'
+  | 'AUDIT_DISCREPANCY'
+  | 'OVERDUE_RETURN'
+  | 'GENERAL'
+
+export interface AppNotification {
+  id: number
+  user_id: number
+  title: string
+  message: string
+  type: NotificationType
+  entity_type: string | null
+  entity_id: number | null
+  is_read: boolean
+  created_at: string
+}
+
+export interface NotificationListResponse {
+  items: AppNotification[]
+  total: number
+  unread_count: number
+}
+
+// ── Activity Log ──────────────────────────────────────────────────────────────
+
+export interface ActivityLog {
+  id: number
+  user_id: number | null
+  action: string
+  entity_type: string | null
+  entity_id: number | null
+  description: string
+  ip_address: string | null
+  created_at: string
+}
+
+// ── Dashboard / KPI ───────────────────────────────────────────────────────────
+
+export interface KPIData {
+  available_assets: number
+  allocated_assets: number
+  under_maintenance: number
+  lost_assets: number
+  retired_assets: number
+  todays_bookings: number
+  pending_transfers: number
+  pending_maintenance: number
+  upcoming_returns: number
+  overdue_returns: number
+  open_audit_cycles: number
+  total_employees: number
+}
+
+export interface RecentActivityItem {
+  id: number
+  user_id: number | null
+  user_name: string
+  action: string
+  entity_type: string | null
+  entity_id: number | null
+  description: string
+  created_at: string
+}
+
+export interface DashboardData {
+  kpis: KPIData
+  recent_activity: RecentActivityItem[]
+  unread_notifications: number
+}

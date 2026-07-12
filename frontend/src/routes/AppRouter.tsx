@@ -8,6 +8,7 @@ import { MainLayout, AuthLayout } from '@/layouts'
 import ProtectedRoute from './ProtectedRoute'
 
 import {
+  ActivityLogsPage,
   AllocationsPage, AllocationHistoryPage,
   AssetDetailPage, AssetsPage,
   AuditDetailPage, AuditsPage,
@@ -16,6 +17,7 @@ import {
   LoginPage,
   MaintenanceDetailPage, MaintenancePage,
   NotFoundPage,
+  NotificationsPage,
   OrganizationPage,
   PlaceholderPage,
   SignupPage,
@@ -72,10 +74,12 @@ export default function AppRouter() {
               <Route path="audits"     element={<AuditsPage />} />
               <Route path="audits/:id" element={<AuditDetailPage />} />
 
+              {/* Notifications & Activity */}
+              <Route path="notifications"  element={<NotificationsPage />} />
+              <Route path="activity-logs"  element={<ActivityLogsPage />} />
+
               {/* Placeholders */}
               <Route path="reports"       element={<PlaceholderPage module="reports" />} />
-              <Route path="notifications" element={<PlaceholderPage module="notifications" />} />
-              <Route path="activity-logs" element={<PlaceholderPage module="activity logs" />} />
               <Route path="departments"   element={<PlaceholderPage module="departments" />} />
               <Route path="categories"    element={<PlaceholderPage module="categories" />} />
               <Route path="employees"     element={<PlaceholderPage module="employees" />} />

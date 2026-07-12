@@ -13,6 +13,7 @@ from app.api.v1.endpoints import (
     auth,
     bookings,
     categories,
+    dashboard,
     departments,
     employees,
     health,
@@ -43,6 +44,7 @@ api_v1_router.include_router(maintenance.router)
 api_v1_router.include_router(maintenance.asset_router)  # /assets/{id}/maintenance-history
 
 # ── Governance & reporting ────────────────────────────────────────────────────
+api_v1_router.include_router(dashboard.router)
 api_v1_router.include_router(audits.router)
 api_v1_router.include_router(notifications.router)
 api_v1_router.include_router(reports.router)
