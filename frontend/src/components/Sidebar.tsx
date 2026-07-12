@@ -1,11 +1,6 @@
 /**
  * Sidebar navigation — shows only the items relevant to the user's role.
- *
- * Role visibility matrix:
- *   EMPLOYEE        — Dashboard, My Assets (bookings), Maintenance requests
- *   DEPARTMENT_HEAD — all EMPLOYEE items + Employees, Departments
- *   ASSET_MANAGER   — Assets, Allocations, Maintenance Approval, Categories
- *   ADMIN           — everything + Departments, Employees, Reports, Activity Logs, Audits
+ * Each item appears exactly once per role (no duplicates).
  */
 
 import { NavLink } from 'react-router-dom'
@@ -13,109 +8,87 @@ import { cn } from '@/utils'
 import { useAuth } from '@/context/AuthContext'
 import type { NavItem, UserRole } from '@/types'
 
-// ── Nav items with role visibility ───────────────────────────────────────────
-
 interface RoleNavItem extends NavItem {
-  roles: UserRole[]   // empty = visible to all authenticated users
+  roles: UserRole[]
 }
 
 const NAV_ITEMS: RoleNavItem[] = [
-  // ── Common ──────────────────────────────────────────────────────────────
+  // ── All roles ────────────────────────────────────────────────────────────
   {
     label: 'Dashboard',
     path: '/',
     roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
 
-  // ── Employee ─────────────────────────────────────────────────────────────
-  {
-    label: 'My Bookings',
-    path: '/bookings',
-    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },
-  {
-    label: 'Booking Calendar',
-    path: '/bookings/calendar',
-    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },
-  {
-    label: 'Maintenance',
-    path: '/maintenance',
-    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },  {
-    label: 'Assets',
-    path: '/assets',
-    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },
-  {
-    label: 'Transfer Requests',
-    path: '/transfers',
-    roles: ['EMPLOYEE', 'DEPARTMENT_HEAD'],
-  },
-
-  // ── Department Head ───────────────────────────────────────────────────────
-  {
-    label: 'My Department',
-    path: '/departments',
-    roles: ['DEPARTMENT_HEAD'],
-  },
-  {
-    label: 'Team Members',
-    path: '/employees',
-    roles: ['DEPARTMENT_HEAD'],
-  },
-
-  // ── Asset Manager ────────────────────────────────────────────────────────
+  // ── Assets ────────────────────────────────────────────────────────────────
   {
     label: 'Assets',
     path: '/assets',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
+
+  // ── Allocations (managers only) ───────────────────────────────────────────
   {
     label: 'Allocations',
     path: '/allocations',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
-  },
-  {
-    label: 'Transfers',
-    path: '/transfers',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER'],
   },
   {
     label: 'Alloc. History',
     path: '/allocations/history',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER'],
   },
+
+  // ── Transfers ─────────────────────────────────────────────────────────────
+  {
+    label: 'Transfers',
+    path: '/transfers',
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
+  },
+
+  // ── Bookings ──────────────────────────────────────────────────────────────
   {
     label: 'Bookings',
     path: '/bookings',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
   {
     label: 'Booking Calendar',
     path: '/bookings/calendar',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
+
+  // ── Maintenance ───────────────────────────────────────────────────────────
   {
-    label: 'Categories',
-    path: '/categories',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
-  },
-  {
-    label: 'Maintenance Approval',
+    label: 'Maintenance',
     path: '/maintenance',
-    roles: ['ASSET_MANAGER', 'ADMIN'],
+    roles: ['ADMIN', 'ASSET_MANAGER', 'DEPARTMENT_HEAD', 'EMPLOYEE'],
   },
+
+  // ── Audits ────────────────────────────────────────────────────────────────
   {
     label: 'Audits',
     path: '/audits',
-    roles: ['ASSET_MANAGER'],
+    roles: ['ADMIN', 'ASSET_MANAGER'],
   },
-  // ── Admin ────────────────────────────────────────────────────────────────
+
+  // ── Reports ───────────────────────────────────────────────────────────────
+  {
+    label: 'Reports',
+    path: '/reports',
+    roles: ['ADMIN', 'ASSET_MANAGER'],
+  },
+
+  // ── Organization (admin only) ─────────────────────────────────────────────
   {
     label: 'Organization Setup',
     path: '/organization',
     roles: ['ADMIN'],
+  },
+  {
+    label: 'Categories',
+    path: '/categories',
+    roles: ['ADMIN', 'ASSET_MANAGER'],
   },
   {
     label: 'Employee Directory',
@@ -127,15 +100,20 @@ const NAV_ITEMS: RoleNavItem[] = [
     path: '/departments',
     roles: ['ADMIN'],
   },
+
+  // ── Dept Head extras ─────────────────────────────────────────────────────
   {
-    label: 'Audits',
-    path: '/audits',
-    roles: ['ADMIN'],
-  },  {
-    label: 'Reports',
-    path: '/reports',
-    roles: ['ADMIN', 'ASSET_MANAGER'],
+    label: 'My Department',
+    path: '/departments',
+    roles: ['DEPARTMENT_HEAD'],
   },
+  {
+    label: 'Team Members',
+    path: '/employees',
+    roles: ['DEPARTMENT_HEAD'],
+  },
+
+  // ── Notifications & Logs ─────────────────────────────────────────────────
   {
     label: 'Notifications',
     path: '/notifications',
@@ -147,8 +125,6 @@ const NAV_ITEMS: RoleNavItem[] = [
     roles: ['ADMIN'],
   },
 ]
-
-// ── Role badge colours ────────────────────────────────────────────────────────
 
 const ROLE_BADGE: Record<UserRole, string> = {
   ADMIN:           'bg-red-100 text-red-700',
@@ -164,8 +140,6 @@ const ROLE_LABEL: Record<UserRole, string> = {
   EMPLOYEE:        'Employee',
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
-
 interface SidebarProps {
   isOpen?: boolean
 }
@@ -174,7 +148,7 @@ export default function Sidebar({ isOpen = true }: SidebarProps) {
   const { user, logout } = useAuth()
   const role = user?.role ?? 'EMPLOYEE'
 
-  const visibleItems = NAV_ITEMS.filter((item) => item.roles.includes(role))
+  const visibleItems = NAV_ITEMS.filter(item => item.roles.includes(role))
 
   return (
     <aside
@@ -185,7 +159,7 @@ export default function Sidebar({ isOpen = true }: SidebarProps) {
       aria-label="Main navigation"
     >
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-slate-700 px-4">
+      <div className="flex h-16 shrink-0 items-center gap-3 border-b border-slate-700 px-4">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-600 font-bold text-white">
           A
         </div>
@@ -197,17 +171,19 @@ export default function Sidebar({ isOpen = true }: SidebarProps) {
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4" aria-label="Sidebar navigation">
         <ul role="list" className="space-y-1 px-2">
-          {visibleItems.map((item) => (
+          {visibleItems.map(item => (
             <li key={`${item.path}-${item.label}`}>
               <NavLink
                 to={item.path}
                 end={item.path === '/'}
+                title={!isOpen ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-sidebar-active text-white'
                       : 'text-sidebar-text hover:bg-sidebar-hover hover:text-white',
+                    !isOpen && 'justify-center',
                   )
                 }
               >
@@ -221,14 +197,9 @@ export default function Sidebar({ isOpen = true }: SidebarProps) {
 
       {/* User footer */}
       {isOpen && user && (
-        <div className="border-t border-slate-700 p-4">
+        <div className="shrink-0 border-t border-slate-700 p-4">
           <div className="mb-2 truncate text-sm font-medium text-white">{user.full_name}</div>
-          <span
-            className={cn(
-              'inline-block rounded-full px-2 py-0.5 text-xs font-medium',
-              ROLE_BADGE[role],
-            )}
-          >
+          <span className={cn('inline-block rounded-full px-2 py-0.5 text-xs font-medium', ROLE_BADGE[role])}>
             {ROLE_LABEL[role]}
           </span>
           <button
@@ -243,8 +214,8 @@ export default function Sidebar({ isOpen = true }: SidebarProps) {
       )}
 
       {!isOpen && (
-        <div className="border-t border-slate-700 p-3">
-          <p className="text-xs text-slate-500">v{import.meta.env.VITE_APP_VERSION ?? '0.1.0'}</p>
+        <div className="shrink-0 border-t border-slate-700 p-3 text-center">
+          <span className="text-[10px] text-slate-500">v{import.meta.env.VITE_APP_VERSION ?? '1.0'}</span>
         </div>
       )}
     </aside>

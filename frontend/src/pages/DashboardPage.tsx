@@ -5,11 +5,11 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardTitle, Spinner } from '@/components/ui'
+import { Card, CardHeader, CardTitle, SkeletonKPIGrid, Spinner } from '@/components/ui'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { useAuth } from '@/context/AuthContext'
 import { dashboardService } from '@/services/dashboard.service'
-import { cn, formatDate } from '@/utils'
+import { cn, formatRelative } from '@/utils'
 import type { DashboardData, KPIData, UserRole } from '@/types'
 
 // ── Role styles ───────────────────────────────────────────────────────────────
@@ -110,9 +110,7 @@ export default function DashboardPage() {
 
       {/* KPI cards */}
       {loading ? (
-        <div className="flex h-32 items-center justify-center">
-          <Spinner size="lg" />
-        </div>
+        <SkeletonKPIGrid count={8} />
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {KPI_CARDS.map(card => (
@@ -153,7 +151,7 @@ export default function DashboardPage() {
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-gray-800">{item.description}</p>
                       <p className="mt-0.5 text-xs text-gray-400">
-                        {item.user_name} · {formatDate(item.created_at)}
+                        {item.user_name} · {formatRelative(item.created_at)}
                       </p>
                     </div>
                   </li>

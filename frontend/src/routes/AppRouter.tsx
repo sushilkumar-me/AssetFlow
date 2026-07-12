@@ -14,6 +14,7 @@ import {
   AuditDetailPage, AuditsPage,
   BookingCalendarPage, BookingsPage,
   DashboardPage,
+  ForbiddenPage,
   LoginPage,
   MaintenanceDetailPage, MaintenancePage,
   NotFoundPage,
@@ -21,6 +22,7 @@ import {
   OrganizationPage,
   PlaceholderPage,
   ReportsPage,
+  ServerErrorPage,
   SignupPage,
   TransfersPage,
 } from '@/pages'
@@ -83,7 +85,6 @@ export default function AppRouter() {
               <Route path="activity-logs"  element={<ActivityLogsPage />} />
 
               {/* Placeholders */}
-              <Route path="reports"       element={<PlaceholderPage module="reports" />} />
               <Route path="departments"   element={<PlaceholderPage module="departments" />} />
               <Route path="categories"    element={<PlaceholderPage module="categories" />} />
               <Route path="employees"     element={<PlaceholderPage module="employees" />} />
@@ -91,8 +92,9 @@ export default function AppRouter() {
           </Route>
 
           {/* Error pages */}
-          <Route path="/403" element={<NotFoundPage />} />
+          <Route path="/403" element={<ForbiddenPage />} />
           <Route path="/404" element={<NotFoundPage />} />
+          <Route path="/500" element={<ServerErrorPage />} />
           <Route path="*"    element={<Navigate to="/404" replace />} />
         </Routes>
       </Suspense>

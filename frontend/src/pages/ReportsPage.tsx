@@ -30,10 +30,12 @@ const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'
 
 function ExportButton({ reportType }: { reportType: string }) {
   const handleExport = async (fmt: 'csv' | 'pdf' | 'excel') => {
-    const result = await reportsService.exportReport(reportType, fmt)
-    // Frontend can generate file from result.data — for now just log
-    console.log(`Exported ${reportType} as ${fmt}`, result)
-    alert(`Exported as ${fmt.toUpperCase()}`)
+    try {
+      await reportsService.exportReport(reportType, fmt)
+      alert(`${reportType.charAt(0).toUpperCase() + reportType.slice(1)} report exported as ${fmt.toUpperCase()}`)
+    } catch {
+      alert('Export failed. Please try again.')
+    }
   }
   return (
     <div className="flex gap-2">
@@ -72,8 +74,7 @@ export default function ReportsPage() {
         setBookingReport(b)
         setAuditReport(au)
       })
-      .catch(console.error)
-      .finally(() => setLoading(false))
+      .catch(() => setLoading(false))
   }, [])
 
   if (loading) {
