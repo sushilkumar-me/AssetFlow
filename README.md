@@ -9,6 +9,12 @@
 <img width="1433" height="1098" alt="Database" src="https://github.com/user-attachments/assets/6090cd84-7192-4ed2-8139-8c468d5fc682" />
 
 AssetFlow gives organizations full visibility and control over every asset they own. From laptops and vehicles to shared conference rooms, AssetFlow tracks the entire asset lifecycle: registration → allocation → maintenance → audit → reporting.
+<img width="1919" height="919" alt="Screenshot 2026-07-12 183446" src="https://github.com/user-attachments/assets/fc906018-5175-4b97-9b0d-f90f4c25d065" />
+<img width="1919" height="925" alt="Screenshot 2026-07-12 183457" src="https://github.com/user-attachments/assets/cc0c2bf0-0d3c-46e7-835c-8d66184c214a" />
+<img width="1919" height="919" alt="Screenshot 2026-07-12 183615" src="https://github.com/user-attachments/assets/8534a0f4-5ee4-44c3-8c52-79a4ed1ce4de" />
+<img width="1919" height="915" alt="Screenshot 2026-07-12 183602" src="https://github.com/user-attachments/assets/b32589b6-dd85-44fd-8cd7-c5620cf2c4ab" />
+<img width="1919" height="911" alt="Screenshot 2026-07-12 183628" src="https://github.com/user-attachments/assets/1ef4acce-77ef-4bd1-ad7f-c353ff146c97" />
+
 
 **Live demo accounts (after seeding):**
 
